@@ -28,10 +28,8 @@ tests/test-output.txt
 ng-sample/app/**/*.js
 
 # Webpack configuration files
+tsconfig.esm.json
 webpack.config.js
-vendor.ts
-vendor-platform.android.ts
-vendor-platform.ios.ts
 
 # IDEs and editors
 /.idea
