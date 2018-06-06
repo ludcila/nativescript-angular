@@ -1,20 +1,20 @@
 import { Component } from "@angular/core";
-import { View, EventData } from "ui/core/view"
+import { View } from "ui/core/view"
 import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     moduleId: module.id,
-    selector: "modal-second-page",
+    selector: "modal-second",
     templateUrl: "./modal-second.component.html"
 })
 export class ModalSecondComponent {
     constructor(private routerExtension: RouterExtensions) { }
 
-    onLoaded(args: EventData) {
+    onLoaded() {
         console.log("modal-second loaded");
     }
 
-    goBack(args: EventData) {
+    goBack() {
         this.routerExtension.back();
     }
 

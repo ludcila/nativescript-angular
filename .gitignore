@@ -1,9 +1,11 @@
+hooks
 node_modules
 platforms
-hooks
+reports
 tags
 **/*.js.map
 **/*.metadata.json
+**/*.ngsummary.json
 
 /nativescript-angular/**/*.d.ts
 /nativescript-angular/**/*.js
@@ -21,8 +23,10 @@ tags
 npm-debug.log
 nativescript-angular*.tgz
 package-lock.json
+test-results.xml
 
 # Apps' JS files
+e2e/**/*.js
 tests/app/**/*.js
 tests/test-output.txt
 ng-sample/app/**/*.js

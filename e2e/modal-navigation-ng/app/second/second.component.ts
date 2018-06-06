@@ -1,22 +1,18 @@
 import { Component, ViewContainerRef } from "@angular/core";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/directives/dialogs";
-import { EventData } from "tns-core-modules/data/observable";
-import { Frame } from "tns-core-modules/ui/frame";
-import { View } from "tns-core-modules/ui/core/view";
 import { ModalRouterComponent } from "../modal/modal-router/modal-router.component";
-import { PageRouterOutlet } from "nativescript-angular/router/page-router-outlet";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ModalComponent } from "../modal/modal.component";
 
 @Component({
     moduleId: module.id,
-    selector: "second-page",
+    selector: "second",
     templateUrl: "./second.component.html"
 })
 export class SecondComponent {
     constructor(private modal: ModalDialogService, private vcRef: ViewContainerRef, private routerExtension: RouterExtensions) { }
 
-    onModalNoFrame(args: EventData) {
+    onModalNoFrame() {
         const options: ModalDialogOptions = {
             context: {
                 navigationVisibility: false
@@ -30,7 +26,7 @@ export class SecondComponent {
         });
     }
 
-    onModalFrame(args: EventData) {
+    onModalFrame() {
         const options: ModalDialogOptions = {
             context: {
                 navigationVisibility: true,
@@ -45,7 +41,7 @@ export class SecondComponent {
         });
     }
 
-    goBack(args: EventData) {
+    goBack() {
         this.routerExtension.back();
     }
 }
