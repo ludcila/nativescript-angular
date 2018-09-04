@@ -10,7 +10,9 @@ import { RouterExtensions } from "nativescript-angular/router";
 export class PlayerComponent implements OnInit {
     items: DataItem[];
 
-    constructor(private itemService: DataService, private router: RouterExtensions) { }
+    constructor(private itemService: DataService, private router: RouterExtensions) { 
+        
+    }
 
     ngOnInit(): void {
         this.items = this.itemService.getPlayers();
