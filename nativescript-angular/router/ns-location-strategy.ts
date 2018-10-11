@@ -11,7 +11,7 @@ export class Outlet {
     modalNavigationDepth: number;
     parent: Outlet;
     isPageNavigationBack: boolean;
-    outletKey: string;
+    outletKeys: Array<string>;
     pathByOutlets: string;
     statesByOutlet: Array<LocationState> = [];
     frame: Frame;
@@ -19,7 +19,7 @@ export class Outlet {
     // Used in reuse-strategy by its children to determine if they should be detached too.
     shouldDetach: boolean = true;
     constructor(outletKey: string, pathByOutlets: string, modalNavigationDepth?: number) {
-        this.outletKey = outletKey;
+        this.outletKeys = [outletKey];
         this.isPageNavigationBack = false;
         this.showingModal = false;
         this.modalNavigationDepth = modalNavigationDepth || 0;
@@ -261,7 +261,7 @@ export class NSLocationStrategy extends LocationStrategy {
             const outletStates = outlet.statesByOutlet;
             const outletLog = outletStates
                 // tslint:disable-next-line:max-line-length
-                .map((v, i) => `${outlet.outletKey}.${i}.[${v.isPageNavigation ? "PAGE" : "INTERNAL"}].[${outlet.modalNavigationDepth ? "MODAL" : "BASE"}] "${v.segmentGroup.toString()}"`)
+                .map((v, i) => `${outlet.outletKeys}.${i}.[${v.isPageNavigation ? "PAGE" : "INTERNAL"}].[${outlet.modalNavigationDepth ? "MODAL" : "BASE"}] "${v.segmentGroup.toString()}"`)
                 .reverse();
 
             result = result.concat(outletLog);
@@ -347,16 +347,8 @@ export class NSLocationStrategy extends LocationStrategy {
         return this.outlets;
     }
 
-    updateOutlet(outlet: Outlet, frame: Frame) {
-        if (!outlet) {
-            routerError("No outlet found for activatedRoute:");
-            return;
-        }
-
-        if (!outlet.frame) {
-            outlet.frame = frame;
-        }
-
+    updateOutletFrame(outlet: Outlet, frame: Frame) {
+        outlet.frame = frame;
         this.currentOutlet = outlet;
     }
 
@@ -439,7 +431,7 @@ export class NSLocationStrategy extends LocationStrategy {
     }
 
     findOutletByKey(outletKey: string): Outlet {
-        return this.outlets.find((outlet) => outlet.outletKey === outletKey);
+        return this.outlets.find((outlet) => outlet.outletKeys.indexOf(outletKey) > -1);
     }
 
     private getOutletByFrame(frame: Frame): Outlet {

@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
-import { Page } from "ui/page";
-
+import { Page } from "tns-core-modules/ui/page";
 @Component({
     // tslint:disable-next-line:component-selector
     selector: "ns-empty-outlet",
@@ -9,6 +8,8 @@ import { Page } from "ui/page";
 })
 export class NSEmptyOutletComponent {
     constructor(private page: Page) {
-        this.page.actionBarHidden = true;
+        if (this.page) {
+            this.page.actionBarHidden = true;
+        }
     }
 }
